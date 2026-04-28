@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Consulting — Автоматизация и интеграция бизнес-процессов</title>
+  <meta name="description" content="Автоматизируем бизнес-процессы, интегрируем сайты с CRM, маркетплейсами и системами управления заказами. Экономим время и деньги вашего бизнеса." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050914;
+      --bg2: #090f1e;
+      --card: #0d1628;
+      --border: rgba(99,110,155,0.18);
+      --accent: #4f7fff;
+      --accent2: #7c4fff;
+      --grad: linear-gradient(135deg, #4f7fff, #7c4fff);
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── GLOW BLOBS ─── */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: rgba(79,127,255,0.12); top: -200px; right: -150px; }
+    .blob-2 { width: 500px; height: 500px; background: rgba(124,79,255,0.1); bottom: -100px; left: -100px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5,9,20,0.8);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--grad);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--grad);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+
+    .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: pointer; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 5% 80px;
+      overflow: hidden;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79,127,255,0.1);
+      border: 1px solid rgba(79,127,255,0.3);
+      color: #7aa8ff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .badge i { font-size: 0.7rem; }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--grad);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 0 40px rgba(79,127,255,0.3);
+    }
+
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--white); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat { }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      display: block;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--muted); }
+
+    .hero-visual {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      opacity: 0.85;
+    }
+
+    .flow-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      width: 200px;
+      position: relative;
+    }
+
+    .flow-card.accent { border-color: rgba(79,127,255,0.4); }
+
+    .flow-card-icon {
+      width: 40px; height: 40px;
+      background: var(--grad);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .flow-card h4 { font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+    .flow-card p { font-size: 0.75rem; color: var(--muted); }
+
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      position: absolute;
+      top: 1rem; right: 1rem;
+      box-shadow: 0 0 8px #4ade80;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { position: relative; padding: 100px 5%; }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #7aa8ff;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ─── PROBLEMS ─── */
+    .problems { background: var(--bg2); }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .problem-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .problem-card:hover { border-color: rgba(79,127,255,0.4); transform: translateY(-4px); }
+
+    .problem-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .problem-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .problem-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover { border-color: rgba(79,127,255,0.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(79,127,255,0.1); }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      background: rgba(79,127,255,0.12);
+      border: 1px solid rgba(79,127,255,0.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      color: #7aa8ff;
+    }
+
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+    .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      background: rgba(79,127,255,0.08);
+      border: 1px solid rgba(79,127,255,0.2);
+      border-radius: 6px;
+      color: #7aa8ff;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--bg2); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 70px; height: 70px;
+      background: var(--grad);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--white);
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 0 30px rgba(79,127,255,0.3);
+    }
+
+    .step h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── INTEGRATIONS ─── */
+    .integrations-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .int-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .int-badge:hover { border-color: var(--accent); }
+    .int-badge i { color: var(--accent); font-size: 1rem; }
+
+    /* ─── CASE STUDY ─── */
+    .case-section { background: var(--bg2); }
+
+    .case-card {
+      background: var(--card);
+      border: 1px solid rgba(79,127,255,0.25);
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+
+    .case-left {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .case-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(79,127,255,0.1);
+      border: 1px solid rgba(79,127,255,0.3);
+      color: #7aa8ff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .case-left h3 { font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 1rem; line-height: 1.3; }
+    .case-left p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .case-results {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .result-item {
+      background: rgba(79,127,255,0.06);
+      border: 1px solid rgba(79,127,255,0.15);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .result-num { font-size: 1.5rem; font-weight: 900; color: var(--white); display: block; }
+    .result-label { font-size: 0.78rem; color: var(--muted); }
+
+    .case-right {
+      background: linear-gradient(135deg, rgba(79,127,255,0.08), rgba(124,79,255,0.12));
+      border-left: 1px solid rgba(79,127,255,0.2);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .case-flow-title { font-size: 0.8rem; font-weight: 700; color: #7aa8ff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .flow-step-icon {
+      width: 36px; height: 36px;
+      background: var(--grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .flow-step h4 { font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .flow-step p { font-size: 0.78rem; color: var(--muted); }
+
+    .case-pptx-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #7aa8ff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: auto;
+      transition: color 0.2s;
+    }
+
+    .case-pptx-link:hover { color: var(--white); }
+
+    /* ─── WHY US ─── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .why-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .why-card:hover { border-color: rgba(79,127,255,0.35); transform: translateY(-4px); }
+
+    .why-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── FORM ─── */
+    .form-section { background: var(--bg2); }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .form-left h2 { margin-bottom: 1rem; }
+    .form-left p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-item-icon {
+      width: 44px; height: 44px;
+      background: rgba(79,127,255,0.1);
+      border: 1px solid rgba(79,127,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7aa8ff;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text { font-size: 0.9rem; color: var(--muted); }
+    .contact-item-text strong { display: block; color: var(--white); font-weight: 600; margin-bottom: 0.1rem; }
+
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem;
+    }
+
+    .form-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .form-card .form-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-full { grid-column: 1 / -1; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+
+    input, textarea, select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79,127,255,0.1);
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(136,146,176,0.5); }
+
+    select option { background: var(--card); }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--grad);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1.25rem;
+      transition: opacity 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      box-shadow: 0 8px 30px rgba(79,127,255,0.25);
+    }
+
+    .form-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    .form-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-msg i { font-size: 3rem; color: #4ade80; margin-bottom: 1rem; display: block; }
+    .success-msg h4 { font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .success-msg p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo { font-weight: 800; color: var(--white); font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .steps::before { display: none; }
+      .case-card { grid-template-columns: 1fr; }
+      .case-right { border-left: none; border-top: 1px solid rgba(79,127,255,0.2); }
+      .hero-visual { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0; right: 0;
+      background: rgba(9,15,30,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5%;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 1rem; }
+    .nav-mobile a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">⚡</div>
+    AI Consulting
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#how">Как работаем</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#contact" class="nav-cta">Оставить заявку</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Меню">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="navMobile">
+  <a href="#services" onclick="toggleMenu()">Услуги</a>
+  <a href="#how" onclick="toggleMenu()">Как работаем</a>
+  <a href="#cases" onclick="toggleMenu()">Кейсы</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:#7aa8ff;font-weight:700;">Оставить заявку</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hero-content fade-up">
+    <div class="badge"><i class="fa-solid fa-bolt"></i> Автоматизация &amp; Интеграция</div>
+    <h1>Автоматизируем бизнес.<br><span class="grad-text">Освобождаем время</span><br>для роста.</h1>
+    <p class="hero-desc">
+      Подключаем ваш сайт к CRM, маркетплейсам и системам управления заказами. Избавляем от ручной работы и выстраиваем процессы, которые работают без вашего участия.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Получить консультацию</a>
+      <a href="#cases" class="btn-secondary"><i class="fa-solid fa-play"></i> Смотреть кейсы</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">3×</span>
+        <span class="stat-label">ускорение обработки заявок</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">80%</span>
+        <span class="stat-label">снижение ручного труда</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">14 дн.</span>
+        <span class="stat-label">до первого результата</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="flow-card accent">
+      <div class="pulse-dot"></div>
+      <div class="flow-card-icon"><i class="fa-solid fa-globe"></i></div>
+      <h4>Сайт / CRM</h4>
+      <p>Заявка автоматически попадает в систему</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon"><i class="fa-solid fa-robot"></i></div>
+      <h4>n8n / Albato</h4>
+      <p>Автоматизация без кода</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon"><i class="fa-solid fa-store"></i></div>
+      <h4>Маркетплейс</h4>
+      <p>Синхронизация остатков и заказов</p>
+    </div>
+    <div class="flow-card accent">
+      <div class="pulse-dot"></div>
+      <div class="flow-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <h4>Аналитика</h4>
+      <p>Все данные в одном месте</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section class="problems" id="problems">
+  <div class="section-label">Узнаёте себя?</div>
+  <h2>Проблемы, которые мы решаем</h2>
+  <p class="section-desc">Каждый день бизнес теряет деньги из-за несвязанных систем и ручных процессов.</p>
+
+  <div class="problems-grid">
+    <div class="problem-card fade-up">
+      <div class="problem-icon">🔄</div>
+      <h3>Данные переносятся вручную</h3>
+      <p>Менеджеры копируют заявки из почты в CRM, заказы с сайта в таблицы — это занимает часы и порождает ошибки.</p>
+    </div>
+    <div class="problem-card fade-up">
+      <div class="problem-icon">📦</div>
+      <h3>Остатки не синхронизированы</h3>
+      <p>На маркетплейсах и сайте разные данные об остатках. Клиенты заказывают то, чего нет в наличии.</p>
+    </div>
+    <div class="problem-card fade-up">
+      <div class="problem-icon">⏱️</div>
+      <h3>Заявки обрабатываются медленно</h3>
+      <p>Клиент оставил заявку, а менеджер увидел её через 3 часа. За это время он уже купил у конкурента.</p>
+    </div>
+    <div class="problem-card fade-up">
+      <div class="problem-icon">📊</div>
+      <h3>Нет единой картины бизнеса</h3>
+      <p>Данные разбросаны по Excel, почте, мессенджерам и разным системам. Невозможно принимать решения быстро.</p>
+    </div>
+    <div class="problem-card fade-up">
+      <div class="problem-icon">💸</div>
+      <h3>Высокая стоимость операций</h3>
+      <p>Рутинные задачи требуют отдельных сотрудников. Автоматизация заменяет их и снижает издержки.</p>
+    </div>
+    <div class="problem-card fade-up">
+      <div class="problem-icon">🔗</div>
+      <h3>Системы не разговаривают друг с другом</h3>
+      <p>Сайт, 1С, CRM, маркетплейс, мессенджер — все работают отдельно, без единого потока данных.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Что мы делаем</div>
+  <h2>Наши услуги</h2>
+  <p class="section-desc">Выстраиваем цифровую инфраструктуру, которая работает на вас 24/7.</p>
+
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+      <h3>Автоматизация бизнес-процессов</h3>
+      <p>Переводим ручные операции в автоматические цепочки: от приёма заявки до уведомления клиента и постановки задачи исполнителю.</p>
+      <div class="service-tags">
+        <span class="tag">n8n</span>
+        <span class="tag">Albato</span>
+        <span class="tag">Make</span>
+        <span class="tag">Zapier</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-plug"></i></div>
+      <h3>Интеграция сайта с CRM</h3>
+      <p>Подключаем форму заявки или интернет-магазин к вашей CRM. Заявки попадают в воронку мгновенно, менеджер получает уведомление в Telegram.</p>
+      <div class="service-tags">
+        <span class="tag">Bitrix24</span>
+        <span class="tag">AmoCRM</span>
+        <span class="tag">HubSpot</span>
+        <span class="tag">API</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-store"></i></div>
+      <h3>Интеграция с маркетплейсами</h3>
+      <p>Синхронизируем товары, остатки и заказы между вашей учётной системой и маркетплейсами в реальном времени.</p>
+      <div class="service-tags">
+        <span class="tag">Wildberries</span>
+        <span class="tag">Ozon</span>
+        <span class="tag">Яндекс Маркет</span>
+        <span class="tag">Kaspi</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+      <h3>Интеграция с 1С и ERP</h3>
+      <p>Связываем веб-платформы с 1С: Предприятие, синхронизируем справочники, заказы, оплаты и остатки без двойного ввода данных.</p>
+      <div class="service-tags">
+        <span class="tag">1С: Торговля</span>
+        <span class="tag">1С: Бухгалтерия</span>
+        <span class="tag">REST API</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-brands fa-telegram"></i></div>
+      <h3>Telegram-боты и уведомления</h3>
+      <p>Создаём ботов для приёма заявок, уведомления команды, отправки счётов и отслеживания статуса заказов — прямо в Telegram.</p>
+      <div class="service-tags">
+        <span class="tag">Telegram Bot API</span>
+        <span class="tag">n8n</span>
+        <span class="tag">WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <h3>Аналитика и дашборды</h3>
+      <p>Собираем данные из всех источников в единый дашборд. Видите продажи, заявки, конверсию и эффективность команды в одном экране.</p>
+      <div class="service-tags">
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Google Sheets</span>
+        <span class="tag">Power BI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section style="padding-top: 0;">
+  <div class="section-label">С чем работаем</div>
+  <h2>Поддерживаемые платформы</h2>
+  <div class="integrations-wrap">
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> n8n</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Albato</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Make (Integromat)</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Bitrix24</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> AmoCRM</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> 1С: Предприятие</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Wildberries</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Ozon</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Яндекс Маркет</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Kaspi.kz</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Telegram</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> WhatsApp</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Google Workspace</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> PostgreSQL</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> WordPress</div>
+    <div class="int-badge"><i class="fa-solid fa-circle-dot"></i> Tilda</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-label">Процесс</div>
+  <h2>Как мы работаем</h2>
+  <p class="section-desc">От первого звонка до работающей интеграции — чёткий процесс без сюрпризов.</p>
+
+  <div class="steps">
+    <div class="step fade-up">
+      <div class="step-num">1</div>
+      <h3>Аудит процессов</h3>
+      <p>Разбираемся в вашем бизнесе: что делается вручную, где теряется время, какие системы уже используются.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">2</div>
+      <h3>Техническое решение</h3>
+      <p>Проектируем схему автоматизации, выбираем инструменты и согласовываем с вами до старта разработки.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">3</div>
+      <h3>Разработка и тест</h3>
+      <p>Строим интеграции, тестируем на реальных данных, отлаживаем все сценарии включая ошибки.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">4</div>
+      <h3>Запуск и поддержка</h3>
+      <p>Запускаем в продакшн, обучаем команду и остаёмся на связи для доработок и расширения.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section" id="cases">
+  <div class="section-label">Кейс</div>
+  <h2>Пример реализованного решения</h2>
+  <p class="section-desc">Реальный проект: автоматизация IT-инфраструктуры автосервиса в Казахстане.</p>
+
+  <div class="case-card fade-up">
+    <div class="case-left">
+      <div>
+        <div class="case-badge"><i class="fa-solid fa-car"></i> Автосервис · Казахстан</div>
+        <h3>Цифровизация сервисного центра: от бумажных журналов к единой системе</h3>
+        <p>
+          Сеть автосервисов вела записи клиентов в бумажных журналах, заказ-наряды — в Excel, а коммуникация с клиентами — через личные телефоны мастеров. Мы разработали комплексное IT-решение, которое объединило все процессы в единую цифровую систему.
+        </p>
+        <div class="case-results">
+          <div class="result-item">
+            <span class="result-num">–70%</span>
+            <span class="result-label">времени на оформление заказ-наряда</span>
+          </div>
+          <div class="result-item">
+            <span class="result-num">+40%</span>
+            <span class="result-label">повторных обращений клиентов</span>
+          </div>
+          <div class="result-item">
+            <span class="result-num">0</span>
+            <span class="result-label">потерянных заявок</span>
+          </div>
+          <div class="result-item">
+            <span class="result-num">14 дн.</span>
+            <span class="result-label">от старта до запуска MVP</span>
+          </div>
+        </div>
+      </div>
+      <a href="autoservice_it_infra_v2.pptx" class="case-pptx-link" download>
+        <i class="fa-solid fa-file-powerpoint"></i> Скачать презентацию решения (PPTX)
+      </a>
+    </div>
+
+    <div class="case-right">
+      <div class="case-flow-title">Реализованные интеграции</div>
+      <div class="flow-step">
+        <div class="flow-step-icon"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4>Онлайн-запись через сайт</h4>
+          <p>Клиент выбирает время и услугу онлайн. Заявка мгновенно попадает в CRM и Telegram мастера.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-icon"><i class="fa-solid fa-file-invoice"></i></div>
+        <div>
+          <h4>Автоматические заказ-наряды</h4>
+          <p>Система формирует документ автоматически по данным из CRM. Мастер только проставляет фактические работы.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-icon"><i class="fa-brands fa-telegram"></i></div>
+        <div>
+          <h4>Уведомления клиентам</h4>
+          <p>Автоматические SMS и Telegram: подтверждение записи, напоминание за день, статус готовности автомобиля.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-icon"><i class="fa-solid fa-warehouse"></i></div>
+        <div>
+          <h4>Учёт запчастей</h4>
+          <p>Склад синхронизирован с заказ-нарядами. Остатки списываются автоматически, закупка планируется заблаговременно.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div>
+          <h4>Дашборд руководителя</h4>
+          <p>Выручка, загрузка мастеров, популярные услуги — всё в реальном времени на любом устройстве.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="section-label">Наши преимущества</div>
+  <h2>Почему выбирают нас</h2>
+  <p class="section-desc">Работаем с реальными задачами, а не продаём «коробки». Каждое решение — под ваш бизнес.</p>
+
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <span class="why-num">01</span>
+      <h3>Без лишнего кода</h3>
+      <p>Используем no-code и low-code инструменты там, где это оправдано. Решения проще в поддержке и быстрее в разработке.</p>
+    </div>
+    <div class="why-card fade-up">
+      <span class="why-num">02</span>
+      <h3>Фиксированные сроки</h3>
+      <p>Оговариваем дедлайны до старта и придерживаемся их. Никаких «ещё чуть-чуть» на протяжении месяцев.</p>
+    </div>
+    <div class="why-card fade-up">
+      <span class="why-num">03</span>
+      <h3>Измеримые результаты</h3>
+      <p>Перед стартом договариваемся о KPI: скорость обработки заявок, % ошибок, экономия времени. Проверяем после запуска.</p>
+    </div>
+    <div class="why-card fade-up">
+      <span class="why-num">04</span>
+      <h3>Полное сопровождение</h3>
+      <p>После запуска не исчезаем. Поддерживаем систему, обучаем команду и дорабатываем под новые потребности.</p>
+    </div>
+    <div class="why-card fade-up">
+      <span class="why-num">05</span>
+      <h3>Опыт в СНГ-рынке</h3>
+      <p>Знаем специфику российского и казахстанского бизнеса: нужные интеграции, локальные маркетплейсы, регуляторика.</p>
+    </div>
+    <div class="why-card fade-up">
+      <span class="why-num">06</span>
+      <h3>Прозрачное ценообразование</h3>
+      <p>Стоимость фиксируем в договоре до начала работ. Дополнения — только с вашего согласия и отдельным бюджетом.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="form-section" id="contact">
+  <div class="form-wrap">
+    <div class="form-left fade-up">
+      <div class="section-label">Связаться</div>
+      <h2>Расскажите о вашей задаче</h2>
+      <p>Оставьте заявку — бесплатно разберём вашу ситуацию и предложим решение. Отвечаем в течение рабочего дня.</p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div class="contact-item-text">
+            <strong>Telegram</strong>
+            Быстрый ответ в мессенджере
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            pavelnyuchev@gmail.com
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="contact-item-text">
+            <strong>Время ответа</strong>
+            Обычно в течение 2–4 часов
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card fade-up">
+      <h3>Оставить заявку</h3>
+      <p class="form-sub">Первая консультация — бесплатно</p>
+
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Ваше имя *</label>
+            <input type="text" id="name" name="name" placeholder="Иван Петров" required />
+          </div>
+          <div class="field">
+            <label for="phone">Телефон *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required />
+          </div>
+          <div class="field form-full">
+            <label for="company">Компания</label>
+            <input type="text" id="company" name="company" placeholder="Название компании" />
+          </div>
+          <div class="field form-full">
+            <label for="service">Нужная услуга</label>
+            <select id="service" name="service">
+              <option value="">— Выберите —</option>
+              <option>Автоматизация бизнес-процессов</option>
+              <option>Интеграция с CRM</option>
+              <option>Интеграция с маркетплейсами</option>
+              <option>Интеграция с 1С / ERP</option>
+              <option>Telegram-бот</option>
+              <option>Аналитика и дашборды</option>
+              <option>Другое / Не знаю</option>
+            </select>
+          </div>
+          <div class="field form-full">
+            <label for="message">Опишите задачу</label>
+            <textarea id="message" name="message" placeholder="Расскажите, что хотите автоматизировать или интегрировать…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">
+          <i class="fa-solid fa-paper-plane"></i> Отправить заявку
+        </button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <i class="fa-solid fa-circle-check"></i>
+        <h4>Заявка отправлена!</h4>
+        <p>Мы свяжемся с вами в течение рабочего дня. Обычно отвечаем быстрее.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-icon" style="width:32px;height:32px;font-size:.9rem;">⚡</div>
+    AI Consulting
+  </div>
+  <p class="footer-copy">© 2026 AI Consulting. Автоматизация и интеграция бизнес-процессов.</p>
+  <div class="footer-links">
+    <a href="#services">Услуги</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#contact">Контакты</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    const nav = document.getElementById('navMobile');
+    nav.classList.toggle('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit (static version — shows success message)
+  function submitForm(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('successMsg');
+    form.style.display = 'none';
+    success.style.display = 'block';
+
+    // Collect form data for mailto fallback
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const company = document.getElementById('company').value;
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value;
+
+    const body = `Имя: ${name}%0AТелефон: ${phone}%0AКомпания: ${company}%0AУслуга: ${service}%0AСообщение: ${message}`;
+    window.location.href = `mailto:pavelnyuchev@gmail.com?subject=Заявка с сайта AI Consulting&body=${body}`;
+  }
+</script>
+</body>
+</html>

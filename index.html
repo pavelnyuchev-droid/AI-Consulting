@@ -732,6 +732,125 @@
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
 
+    /* ─── STATS ─── */
+    .stats-section { background: var(--bg2); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-card {
+      padding: 2rem 1rem;
+    }
+
+    .stat-counter {
+      font-size: 3rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── TEAM ─── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .team-card:hover { border-color: rgba(79,127,255,0.35); transform: translateY(-4px); }
+
+    .team-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(79,127,255,0.2);
+    }
+
+    .team-info h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+
+    .team-role {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #7aa8ff;
+      background: rgba(79,127,255,0.1);
+      border: 1px solid rgba(79,127,255,0.2);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-info p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--bg2); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .testimonial-card:hover { border-color: rgba(79,127,255,0.3); transform: translateY(-4px); }
+
+    .testimonial-stars { color: #fbbf24; font-size: 0.85rem; margin-bottom: 1rem; }
+
+    .testimonial-text { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; font-style: italic; }
+
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 0.9rem; font-weight: 700; color: var(--white); }
+    .author-meta { font-size: 0.78rem; color: var(--muted); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1100px) {
       .services-grid { grid-template-columns: 1fr 1fr; }
@@ -740,6 +859,9 @@
       .case-card { grid-template-columns: 1fr; }
       .case-right { border-left: none; border-top: 1px solid rgba(79,127,255,0.2); }
       .hero-visual { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -751,6 +873,8 @@
       .form-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .team-card { flex-direction: column; }
     }
 
     /* ─── ANIMATIONS ─── */
@@ -1114,6 +1238,30 @@
   </div>
 </section>
 
+<!-- STATS -->
+<section class="stats-section">
+  <div class="section-label">Нам доверяют</div>
+  <h2>Цифры говорят сами за себя</h2>
+  <div class="stats-grid" style="margin-top:3rem;">
+    <div class="stat-card fade-up">
+      <span class="stat-counter" data-target="25">0</span>
+      <p>лет опыта в бизнесе и финансах</p>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-counter" data-target="75">0</span>
+      <p>предпринимателей получили помощь в проектах</p>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-counter" data-target="20">0</span>
+      <p>реализованных интеграций и автоматизаций</p>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-counter" data-target="14">0</span>
+      <p>дней — среднее время до первого результата</p>
+    </div>
+  </div>
+</section>
+
 <!-- WHY US -->
 <section>
   <div class="section-label">Наши преимущества</div>
@@ -1154,6 +1302,75 @@
   </div>
 </section>
 
+<!-- TEAM -->
+<section>
+  <div class="section-label">Кто мы</div>
+  <h2>Наша команда</h2>
+  <p class="section-desc">Предприниматели и эксперты, которые сами прошли путь от идеи до работающего бизнеса.</p>
+
+  <div class="team-grid">
+    <div class="team-card fade-up">
+      <div class="team-avatar">👤</div>
+      <div class="team-info">
+        <h3>Павел Нючев</h3>
+        <span class="team-role">Основатель · Эксперт по автоматизации</span>
+        <p>Более 25 лет в финансах и бизнесе: главный бухгалтер, аудитор, финансовый директор. Собственное ИП с 2004 года. Специализируется на автоматизации бизнес-процессов с n8n и Albato, интеграции систем. Знает изнутри, где бизнес теряет деньги на ручных операциях.</p>
+      </div>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar">🤝</div>
+      <div class="team-info">
+        <h3>Александр Ким</h3>
+        <span class="team-role">Партнёр · Консультант по digital-интеграциям</span>
+        <p>Предприниматель и консультант с опытом быстрого запуска нишевых проектов. Эксперт по интеграции с сервисами доставки и маркетплейсами: Яндекс Еда, Kaspi и другими. Помогает выстраивать цифровую инфраструктуру для бизнесов в России и Казахстане.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-label">Отзывы</div>
+  <h2>Истории клиентов</h2>
+  <p class="section-desc">Реальные результаты от реальных людей, которым мы помогли автоматизировать бизнес.</p>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">«Павел помог настроить интеграцию сайта с AmoCRM и уведомлениями в Telegram. Теперь ни одна заявка не теряется. Время обработки сократилось с нескольких часов до 5 минут.»</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">АП</div>
+        <div>
+          <div class="author-name">Анна П.</div>
+          <div class="author-meta">Кофейня · Москва · Март 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">«Автоматизировали запись клиентов и учёт запчастей на нашем автосервисе. Бумажные журналы ушли в прошлое. Теперь вижу всё в дашборде, мастера получают задачи автоматически.»</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ДК</div>
+        <div>
+          <div class="author-name">Дмитрий К.</div>
+          <div class="author-meta">Автосервис · Подмосковье · Июнь 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">«Подключили интернет-магазин к Wildberries и Ozon. Остатки синхронизируются автоматически, заказы с маркетплейсов приходят сразу в 1С. Бизнес заработал в разы эффективнее!»</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">МИ</div>
+        <div>
+          <div class="author-name">Мария И.</div>
+          <div class="author-meta">Интернет-магазин (handmade) · Октябрь 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT FORM -->
 <section class="form-section" id="contact">
   <div class="form-wrap">
@@ -1164,17 +1381,24 @@
 
       <div class="contact-items">
         <div class="contact-item">
-          <div class="contact-item-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
           <div class="contact-item-text">
-            <strong>Telegram</strong>
-            Быстрый ответ в мессенджере
+            <strong>Телефон</strong>
+            +7 (905) 545-58-76
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
           <div class="contact-item-text">
             <strong>Email</strong>
-            pavelnyuchev@gmail.com
+            info@prostodelai.ru
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div class="contact-item-text">
+            <strong>Telegram / WhatsApp</strong>
+            +7 (905) 545-58-76
           </div>
         </div>
         <div class="contact-item">
@@ -1239,16 +1463,71 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <div class="logo-icon" style="width:32px;height:32px;font-size:.9rem;">⚡</div>
-    AI Consulting
+<footer style="display:block;padding:3rem 5%;">
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;margin-bottom:2rem;flex-wrap:wrap;">
+    <div>
+      <div class="footer-logo" style="margin-bottom:1rem;">
+        <div class="logo-icon" style="width:32px;height:32px;font-size:.9rem;">⚡</div>
+        AI Consulting
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">
+        Автоматизируем бизнес-процессы, интегрируем системы, помогаем бизнесу расти без лишних затрат на ручной труд.
+      </p>
+      <div style="font-size:0.78rem;color:#5a6480;line-height:1.8;">
+        <p>ИП Нючев Павел Анатольевич</p>
+        <p>ИНН: 772151885296</p>
+        <p>ОГРНИП: 304770001339432</p>
+        <p>123098, г. Москва, ул. Рогова, д. 15, корп. 2</p>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Услуги</h4>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+        <a href="#services" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Автоматизация БП</a>
+        <a href="#services" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Интеграция с CRM</a>
+        <a href="#services" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Маркетплейсы</a>
+        <a href="#services" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Telegram-боты</a>
+        <a href="#services" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Аналитика</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Компания</h4>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+        <a href="#cases" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Кейсы</a>
+        <a href="#how" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Как работаем</a>
+        <a href="https://prostodelai.ru" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Просто делай!</a>
+        <a href="https://сопровождениеяндекседа.рф" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Яндекс Еда</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Контакты</h4>
+      <div style="font-size:0.85rem;color:var(--muted);line-height:2;">
+        <p><i class="fa-solid fa-phone" style="color:#7aa8ff;width:16px;"></i> +7 (905) 545-58-76</p>
+        <p><i class="fa-solid fa-envelope" style="color:#7aa8ff;width:16px;"></i> info@prostodelai.ru</p>
+      </div>
+      <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+        <a href="https://wa.me/79055455876" target="_blank" style="width:38px;height:38px;background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#25D366;font-size:1rem;text-decoration:none;">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://t.me/+79055455876" target="_blank" style="width:38px;height:38px;background:rgba(34,158,217,0.15);border:1px solid rgba(34,158,217,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#229ED9;font-size:1rem;text-decoration:none;">
+          <i class="fa-brands fa-telegram"></i>
+        </a>
+      </div>
+    </div>
   </div>
-  <p class="footer-copy">© 2026 AI Consulting. Автоматизация и интеграция бизнес-процессов.</p>
-  <div class="footer-links">
-    <a href="#services">Услуги</a>
-    <a href="#cases">Кейсы</a>
-    <a href="#contact">Контакты</a>
+  <div style="border-top:1px solid var(--border);padding-top:1.5rem;">
+    <div style="font-size:0.75rem;color:#4a5270;line-height:1.8;margin-bottom:1rem;">
+      Информация на сайте носит справочный характер и не является публичной офертой (ст. 437 ГК РФ).
+      Персональные данные обрабатываются в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ.
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <p style="font-size:0.8rem;color:#4a5270;">© 2024–2026 ИП Нючев П. А. Все права защищены.</p>
+      <div class="footer-links">
+        <a href="#services">Услуги</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -1270,6 +1549,29 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Animated counters
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '+';
+      let start = null;
+      const duration = 1800;
+      const step = (ts) => {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * ease) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.stat-counter').forEach(el => counterObserver.observe(el));
 
   // Form submit (static version — shows success message)
   function submitForm(e) {

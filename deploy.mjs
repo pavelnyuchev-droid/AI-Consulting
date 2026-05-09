@@ -13,11 +13,13 @@ const config = {
   tryKeyboard: true,
 };
 
-const remoteDir = '/home/n/nuchevy7/prostodelay.store/public_html';
+const remoteDir = '/home/n/nuchevy7/prostodelai.store/public_html';
 
 const files = [
   { local: path.join(__dirname, 'index.html'), remote: '/index.html' },
   { local: path.join(__dirname, 'autoservice_it_infra_v2.pptx'), remote: '/autoservice_it_infra_v2.pptx' },
+  { local: path.join(__dirname, 'privacy.html'), remote: '/privacy.html' },
+  { local: path.join(__dirname, 'favicon.svg'), remote: '/favicon.svg' },
 ];
 
 function uploadFile(sftp, localPath, remotePath) {

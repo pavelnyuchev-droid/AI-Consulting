@@ -13,7 +13,7 @@ const config = {
   tryKeyboard: true,
 };
 
-const remoteDir = '/home/n/nuchevy7/prostodelai.store/public_html';
+const remoteDir = '/home/n/nuchevy7/prostodelay.store/public_html';
 
 const files = [
   { local: path.join(__dirname, 'index.html'), remote: '/index.html' },

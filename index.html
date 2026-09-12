@@ -904,6 +904,34 @@
     .nav-mobile.open { display: flex; }
     .nav-mobile a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 1rem; }
     .nav-mobile a:hover { color: var(--white); }
+
+    .audit-promo {
+      max-width: 980px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      border: 1px solid rgba(255,77,0,.45);
+      border-radius: 22px;
+      background: radial-gradient(circle at 15% 10%, rgba(255,77,0,.18), transparent 38%), var(--card);
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    }
+    .audit-promo-grid { display:grid;grid-template-columns:1fr 270px;gap:2rem;align-items:center; }
+    .audit-promo-badge { display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;border-radius:999px;background:var(--orange);color:#fff;font-size:.82rem;font-weight:800;margin-bottom:1rem; }
+    .audit-promo-price { display:flex;align-items:flex-end;gap:.8rem;flex-wrap:wrap;margin-top:1.1rem; }
+    .audit-promo-old { color:var(--muted);font-size:1.1rem;text-decoration:line-through; }
+    .audit-promo-new { color:var(--orange);font-size:2.6rem;line-height:1;font-weight:900; }
+    .audit-promo-counter { padding:1.35rem;border:1px solid var(--border);border-radius:18px;background:rgba(9,15,30,.8);text-align:center; }
+    .audit-promo-places { color:var(--orange);font-size:2.35rem;font-weight:900;margin:.25rem 0 .7rem; }
+    .audit-promo-timer { color:var(--white);font-size:.9rem;margin-bottom:1rem; }
+    .audit-promo-terms { color:#6f7894;font-size:.75rem;line-height:1.6;margin-top:1.35rem; }
+    .audit-promo-bar { position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:90;max-width:920px;margin:auto;display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border:1px solid rgba(255,77,0,.4);border-radius:18px;background:rgba(13,22,40,.96);box-shadow:0 18px 60px rgba(0,0,0,.45);backdrop-filter:blur(16px); }
+    .audit-promo-bar-copy { flex:1; }
+    .audit-promo-bar-close { border:0;background:transparent;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:.35rem; }
+    @media(max-width:720px) {
+      .audit-promo-grid { grid-template-columns:1fr; }
+      .audit-promo { padding:1.35rem; }
+      .audit-promo-bar { align-items:stretch;flex-direction:column;padding-right:2.5rem; }
+      .audit-promo-bar-close { position:absolute;right:.6rem;top:.45rem; }
+    }
   </style>
 </head>
 <body>
@@ -916,6 +944,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services">Услуги</a></li>
+    <li><a href="#regulated-sites">Сайт для аудиторов</a></li>
     <li><a href="#how">Как работаем</a></li>
     <li><a href="#cases">Кейсы</a></li>
     <li><a href="#contact" class="nav-cta">Оставить заявку</a></li>
@@ -927,6 +956,7 @@
 
 <div class="nav-mobile" id="navMobile">
   <a href="#services" onclick="toggleMenu()">Услуги</a>
+  <a href="#regulated-sites" onclick="toggleMenu()">Сайт для аудиторов</a>
   <a href="#how" onclick="toggleMenu()">Как работаем</a>
   <a href="#cases" onclick="toggleMenu()">Кейсы</a>
   <a href="#contact" onclick="toggleMenu()" style="color:#FF8040;font-weight:700;">Оставить заявку</a>
@@ -1106,6 +1136,104 @@
     </div>
   </div>
 </section>
+
+<!-- REGULATED WEBSITES -->
+<section id="regulated-sites" style="padding-top:0;">
+  <div class="section-label">Сайты аудиторских организаций</div>
+  <h2>Официальный сайт аудитора — часть обязательного раскрытия</h2>
+  <p class="section-desc">
+    Проектируем сайт с учётом обязательных сведений для аудиторской организации:
+    что разместить, где разместить, в какой срок обновлять и сколько лет хранить в архиве.
+  </p>
+
+  <div class="audit-promo fade-up">
+    <div class="audit-promo-grid">
+      <div>
+        <div class="audit-promo-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Пилотная программа</div>
+        <h3 style="font-size:clamp(1.7rem,3vw,2.35rem);margin-bottom:.7rem;">Скидка 50% первым 10 клиентам</h3>
+        <p style="color:var(--muted);line-height:1.7;">Базовый сайт аудиторской организации с разделом раскрытия информации.</p>
+        <div class="audit-promo-price">
+          <span class="audit-promo-old">59 800 ₽</span>
+          <span class="audit-promo-new">29 900 ₽</span>
+        </div>
+      </div>
+      <div class="audit-promo-counter">
+        <div style="color:var(--muted);font-size:.85rem;">Осталось мест</div>
+        <div class="audit-promo-places"><span class="audit-remaining">10</span> из 10</div>
+        <div class="audit-promo-timer"><i class="fa-regular fa-clock"></i> <span class="audit-countdown">Расчёт времени…</span></div>
+        <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;" onclick="chooseRegulatedService('audit_organization_site')">Закрепить место</a>
+      </div>
+    </div>
+    <p class="audit-promo-terms">
+      Предложение действует по 31 августа 2026 года включительно или до окончания 10 мест.
+      Место закрепляется после согласования состава проекта, заключения договора и внесения предусмотренной договором предоплаты.
+      Дополнительные работы и сопровождение оплачиваются отдельно.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card fade-up" style="border-color:rgba(255,77,0,.5);">
+      <div class="service-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+      <div class="section-label" style="margin-bottom:.6rem;">Минфин · Закон № 307-ФЗ</div>
+      <h3>Сайт аудиторской организации</h3>
+      <p>
+        Создаём официальный сайт с разделом раскрытия информации по приказу Минфина № 198н.
+        Для организаций, работающих с ОЗО и ОЗОФР, предусматриваем расширенную структуру и требования Банка России.
+      </p>
+      <div class="service-tags">
+        <span class="tag">Раскрытие в 1 переход</span>
+        <span class="tag">Архив по годам</span>
+        <span class="tag">ОЗО / ОЗОФР</span>
+        <span class="tag">Сроки обновления</span>
+      </div>
+      <ul style="color:var(--muted);line-height:1.8;margin:1.2rem 0 1.5rem;padding-left:1.2rem;">
+        <li>анкета и проверка комплектности сведений;</li>
+        <li>первичное заполнение раздела раскрытия;</li>
+        <li>домен, корпоративная почта, SSL и Beget;</li>
+        <li>ежегодное обновление и техническое сопровождение.</li>
+      </ul>
+      <a href="#contact" class="btn-primary" onclick="chooseRegulatedService('audit_organization_site')">
+        <i class="fa-solid fa-file-signature"></i> Заказать сайт аудитора
+      </a>
+    </div>
+
+  </div>
+
+  <div class="case-card fade-up" style="margin-top:2rem;padding:1.5rem 2rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.5rem;">
+      <div>
+        <strong style="display:block;color:var(--white);margin-bottom:.4rem;">1. Матрица требований</strong>
+        <span style="color:var(--muted);font-size:.9rem;">Определяем применимые нормы, разделы, документы и сроки.</span>
+      </div>
+      <div>
+        <strong style="display:block;color:var(--white);margin-bottom:.4rem;">2. Сбор материалов</strong>
+        <span style="color:var(--muted);font-size:.9rem;">Даём заказчику структурированную анкету без лишних документов.</span>
+      </div>
+      <div>
+        <strong style="display:block;color:var(--white);margin-bottom:.4rem;">3. Запуск и архив</strong>
+        <span style="color:var(--muted);font-size:.9rem;">Публикуем, настраиваем резервные копии и хранение редакций.</span>
+      </div>
+      <div>
+        <strong style="display:block;color:var(--white);margin-bottom:.4rem;">4. Сопровождение</strong>
+        <span style="color:var(--muted);font-size:.9rem;">Обновляем обязательные сведения и контролируем календарь.</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:#5a6480;font-size:.78rem;line-height:1.6;margin-top:1.5rem;">
+    Итоговый перечень публикаций определяется после идентификации статуса, лицензий и видов деятельности заказчика.
+    Разработка сайта не заменяет правовое заключение профильного специалиста.
+  </p>
+</section>
+
+<div class="audit-promo-bar" id="auditPromoBar">
+  <div class="audit-promo-bar-copy">
+    <strong style="display:block;color:var(--white);">Сайт аудиторской организации — 29 900 ₽ вместо 59 800 ₽</strong>
+    <span style="color:var(--muted);font-size:.82rem;">Осталось <span class="audit-remaining">10</span> из 10 мест · до 1 сентября 2026 года</span>
+  </div>
+  <a href="#contact" class="btn-primary" onclick="chooseRegulatedService('audit_organization_site')">Закрепить место</a>
+  <button class="audit-promo-bar-close" type="button" aria-label="Закрыть специальное предложение" onclick="document.getElementById('auditPromoBar').remove()">×</button>
+</div>
 
 <!-- INTEGRATIONS -->
 <section style="padding-top: 0;">
@@ -1435,6 +1563,7 @@
             <label for="service">Нужная услуга</label>
             <select id="service" name="service">
               <option value="">— Выберите —</option>
+              <option value="audit_organization_site">Сайт аудиторской организации</option>
               <option>Автоматизация бизнес-процессов</option>
               <option>Интеграция с CRM</option>
               <option>Интеграция с маркетплейсами</option>
@@ -1443,6 +1572,166 @@
               <option>Аналитика и дашборды</option>
               <option>Другое / Не знаю</option>
             </select>
+          </div>
+          <div class="field form-full regulated-site-field" hidden>
+            <label for="audit_company_name">Полное наименование организации *</label>
+            <input type="text" id="audit_company_name" name="company_name" placeholder="ООО «Аудит...»" />
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_inn">ИНН *</label>
+            <input type="text" id="audit_inn" name="inn" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10 цифр" />
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_region">Регион *</label>
+            <select id="audit_region" name="region">
+              <option value="">— Выберите регион —</option>
+              <option>Москва</option>
+              <option>Республика Адыгея</option>
+              <option>Республика Башкортостан</option>
+              <option>Республика Бурятия</option>
+              <option>Республика Алтай</option>
+              <option>Республика Дагестан</option>
+              <option>Республика Ингушетия</option>
+              <option>Кабардино-Балкарская Республика</option>
+              <option>Республика Калмыкия</option>
+              <option>Карачаево-Черкесская Республика</option>
+              <option>Республика Карелия</option>
+              <option>Республика Коми</option>
+              <option>Республика Марий Эл</option>
+              <option>Республика Мордовия</option>
+              <option>Республика Саха (Якутия)</option>
+              <option>Республика Северная Осетия — Алания</option>
+              <option>Республика Татарстан</option>
+              <option>Республика Тыва</option>
+              <option>Удмуртская Республика</option>
+              <option>Республика Хакасия</option>
+              <option>Чеченская Республика</option>
+              <option>Чувашская Республика</option>
+              <option>Алтайский край</option>
+              <option>Краснодарский край</option>
+              <option>Красноярский край</option>
+              <option>Приморский край</option>
+              <option>Ставропольский край</option>
+              <option>Хабаровский край</option>
+              <option>Амурская область</option>
+              <option>Архангельская область</option>
+              <option>Астраханская область</option>
+              <option>Белгородская область</option>
+              <option>Брянская область</option>
+              <option>Владимирская область</option>
+              <option>Волгоградская область</option>
+              <option>Вологодская область</option>
+              <option>Воронежская область</option>
+              <option>Ивановская область</option>
+              <option>Иркутская область</option>
+              <option>Калининградская область</option>
+              <option>Калужская область</option>
+              <option>Камчатский край</option>
+              <option>Кемеровская область — Кузбасс</option>
+              <option>Кировская область</option>
+              <option>Костромская область</option>
+              <option>Курганская область</option>
+              <option>Курская область</option>
+              <option>Ленинградская область</option>
+              <option>Липецкая область</option>
+              <option>Магаданская область</option>
+              <option>Московская область</option>
+              <option>Мурманская область</option>
+              <option>Нижегородская область</option>
+              <option>Новгородская область</option>
+              <option>Новосибирская область</option>
+              <option>Омская область</option>
+              <option>Оренбургская область</option>
+              <option>Орловская область</option>
+              <option>Пензенская область</option>
+              <option>Пермский край</option>
+              <option>Псковская область</option>
+              <option>Ростовская область</option>
+              <option>Рязанская область</option>
+              <option>Самарская область</option>
+              <option>Саратовская область</option>
+              <option>Сахалинская область</option>
+              <option>Свердловская область</option>
+              <option>Смоленская область</option>
+              <option>Тамбовская область</option>
+              <option>Тверская область</option>
+              <option>Томская область</option>
+              <option>Тульская область</option>
+              <option>Тюменская область</option>
+              <option>Ульяновская область</option>
+              <option>Челябинская область</option>
+              <option>Забайкальский край</option>
+              <option>Ярославская область</option>
+              <option>Санкт-Петербург</option>
+              <option>Еврейская автономная область</option>
+              <option>Ненецкий автономный округ</option>
+              <option>Ханты-Мансийский автономный округ — Югра</option>
+              <option>Чукотский автономный округ</option>
+              <option>Ямало-Ненецкий автономный округ</option>
+              <option>Республика Крым</option>
+              <option>Севастополь</option>
+              <option>Донецкая Народная Республика</option>
+              <option>Луганская Народная Республика</option>
+              <option>Запорожская область</option>
+              <option>Херсонская область</option>
+            </select>
+          </div>
+          <div class="field regulated-site-field audit-only-field" hidden>
+            <label for="audit_category">Категория организации *</label>
+            <select id="audit_category" name="audit_category">
+              <option value="">— Выберите —</option>
+              <option value="standard">Аудиторская организация</option>
+              <option value="ozo">Работаем с ОЗО</option>
+              <option value="ozofr">Работаем с ОЗОФР</option>
+              <option value="unknown">Нужна помощь определить</option>
+            </select>
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_current_site">Текущий сайт</label>
+            <input type="url" id="audit_current_site" name="current_site" placeholder="https://..." />
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_project_scope">Что требуется *</label>
+            <select id="audit_project_scope" name="project_scope">
+              <option value="">— Выберите —</option>
+              <option value="new">Новый сайт</option>
+              <option value="redesign">Обновление существующего</option>
+              <option value="disclosure">Только раздел раскрытия</option>
+              <option value="unknown">Нужна консультация</option>
+            </select>
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_domain_status">Домен *</label>
+            <select id="audit_domain_status" name="domain_status">
+              <option value="">— Выберите —</option>
+              <option value="has_domain">Домен уже есть</option>
+              <option value="register">Нужно зарегистрировать</option>
+              <option value="help">Нужна помощь с выбором</option>
+            </select>
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_beget_status">Хостинг Beget *</label>
+            <select id="audit_beget_status" name="beget_status">
+              <option value="">— Выберите —</option>
+              <option value="has_beget">Аккаунт Beget уже есть</option>
+              <option value="create_beget">Нужно создать аккаунт</option>
+              <option value="other_hosting">Другой хостинг</option>
+              <option value="unknown">Нужна рекомендация</option>
+            </select>
+          </div>
+          <div class="field regulated-site-field" hidden>
+            <label for="audit_deadline">Желаемый срок запуска</label>
+            <select id="audit_deadline" name="deadline">
+              <option value="">— Выберите срок —</option>
+              <option value="3-5_days">В ближайшее время — 3–5 дней</option>
+              <option value="1-2_weeks">1–2 недели</option>
+              <option value="nearest_month">В ближайший месяц</option>
+              <option value="not_urgent_important">Не срочно, но важно</option>
+            </select>
+          </div>
+          <div class="field form-full">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="name@company.ru" required />
           </div>
           <div class="field form-full">
             <label for="message">Опишите задачу</label>
@@ -1575,23 +1864,97 @@
 
   document.querySelectorAll('.stat-counter').forEach(el => counterObserver.observe(el));
 
-  // Form submit (static version — shows success message)
-  function submitForm(e) {
+  const serviceSelect = document.getElementById('service');
+  const regulatedFields = Array.from(document.querySelectorAll('.regulated-site-field'));
+
+  function toggleAuditFields() {
+    const isAuditSite = serviceSelect.value === 'audit_organization_site';
+    const isRegulatedSite = serviceSelect.value === 'regulated_organization_site';
+    const needsRegulatedFields = isAuditSite || isRegulatedSite;
+    regulatedFields.forEach(field => {
+      const auditOnly = field.classList.contains('audit-only-field');
+      const regulatedOnly = field.classList.contains('regulated-only-field');
+      const visible = needsRegulatedFields && (!auditOnly || isAuditSite) && (!regulatedOnly || isRegulatedSite);
+      field.hidden = !visible;
+      field.querySelectorAll('input, select').forEach(control => {
+        const optional = control.id === 'audit_current_site' || control.id === 'audit_deadline';
+        control.required = visible && !optional;
+      });
+    });
+    document.getElementById('message').placeholder = needsRegulatedFields
+      ? 'Укажите статус, лицензии, старый сайт, сроки или особенности проекта…'
+      : 'Расскажите, что хотите автоматизировать или интегрировать…';
+  }
+
+  serviceSelect.addEventListener('change', toggleAuditFields);
+  toggleAuditFields();
+
+  function chooseRegulatedService(serviceValue) {
+    serviceSelect.value = serviceValue;
+    toggleAuditFields();
+    setTimeout(() => document.getElementById('name').focus(), 250);
+  }
+
+  // Form submit
+  async function submitForm(e) {
     e.preventDefault();
     const form = document.getElementById('contactForm');
     const success = document.getElementById('successMsg');
-    form.style.display = 'none';
-    success.style.display = 'block';
+    const submitButton = form.querySelector('.form-submit');
+    const formData = new FormData(form);
+    const service = formData.get('service');
+    const message = String(formData.get('message') || '');
+    const payload = {
+      lead_type: service === 'audit_organization_site'
+        ? 'audit_organization_site'
+        : service === 'regulated_organization_site'
+          ? 'regulated_organization_site'
+          : 'consultation',
+      promo_campaign: service === 'audit_organization_site' ? 'audit_pilot_2026' : '',
+      promo_price: service === 'audit_organization_site' ? '29900' : '',
+      source: window.location.hostname,
+      page_url: window.location.href,
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      email: formData.get('email'),
+      company: service === 'audit_organization_site' ? formData.get('company_name') : formData.get('company'),
+      company_name: formData.get('company_name') || formData.get('company'),
+      inn: formData.get('inn'),
+      region: formData.get('region'),
+      service,
+      current_site: formData.get('current_site'),
+      audit_category: formData.get('audit_category'),
+      regulated_type: formData.get('regulated_type'),
+      project_scope: formData.get('project_scope'),
+      domain_status: formData.get('domain_status'),
+      beget_status: formData.get('beget_status'),
+      deadline: formData.get('deadline'),
+      comment: message,
+      question: message,
+      consent: '1'
+    };
 
-    // Collect form data for mailto fallback
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const company = document.getElementById('company').value;
-    const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Отправляем…';
 
-    const body = `Имя: ${name}%0AТелефон: ${phone}%0AКомпания: ${company}%0AУслуга: ${service}%0AСообщение: ${message}`;
-    window.location.href = `mailto:pavelnyuchev@gmail.com?subject=Заявка с сайта AI Consulting&body=${body}`;
+    try {
+      const response = await fetch('https://h.albato.ru/wh/37/1lf85j6/RoWUDn1e4EaIZhMO91a6AKaVzk22PSuiLKYR1N7dXXE/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('Webhook rejected the request');
+      reachStoreMetrikaGoal('contact_form_submit', {
+        service: service || 'consultation',
+        lead_type: payload.lead_type
+      });
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } catch (error) {
+      alert('Не удалось отправить заявку. Позвоните нам или напишите на info@prostodelai.ru.');
+      submitButton.disabled = false;
+      submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Отправить заявку';
+    }
   }
 </script>
 <!-- COOKIE BANNER -->
@@ -1611,6 +1974,54 @@
 </div>
 
 <script>
+  // Пилотная программа: значение меняется только после фактического закрепления места.
+  const auditPilotRemaining = 10;
+  const auditPilotDeadline = new Date('2026-09-01T00:00:00+03:00').getTime();
+  document.querySelectorAll('.audit-remaining').forEach(el => { el.textContent = auditPilotRemaining; });
+  function updateAuditCountdown() {
+    const difference = Math.max(0, auditPilotDeadline - Date.now());
+    const days = Math.floor(difference / 86400000);
+    const hours = Math.floor((difference % 86400000) / 3600000);
+    const minutes = Math.floor((difference % 3600000) / 60000);
+    document.querySelectorAll('.audit-countdown').forEach(el => {
+      el.textContent = difference > 0 ? `${days} дн. ${hours} ч. ${minutes} мин.` : 'Предложение завершено';
+    });
+  }
+  updateAuditCountdown();
+  setInterval(updateAuditCountdown, 60000);
+
+  // Яндекс Метрика запускается только после согласия посетителя на аналитические cookies.
+  const storeMetrikaId = 111095456;
+  let storeMetrikaInitialized = false;
+  function initStoreMetrika() {
+    if (storeMetrikaInitialized || localStorage.getItem('cookieConsent') !== 'accepted') return;
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (let j=0;j<document.scripts.length;j++) {
+        if (document.scripts[j].src === r) return;
+      }
+      k=e.createElement(t);
+      a=e.getElementsByTagName(t)[0];
+      k.async=1;
+      k.src=r;
+      a.parentNode.insertBefore(k,a);
+    })(window,document,'script',`https://mc.yandex.ru/metrika/tag.js?id=${storeMetrikaId}`,'ym');
+    ym(storeMetrikaId,'init',{
+      ssr:true,
+      webvisor:true,
+      clickmap:true,
+      accurateTrackBounce:true,
+      trackLinks:true
+    });
+    storeMetrikaInitialized = true;
+  }
+  function reachStoreMetrikaGoal(goal, params) {
+    if (localStorage.getItem('cookieConsent') !== 'accepted') return;
+    initStoreMetrika();
+    if (typeof ym === 'function') ym(storeMetrikaId,'reachGoal',goal,params);
+  }
+
   // Cookie consent
   function showCookieBanner() {
     if (!localStorage.getItem('cookieConsent')) {
@@ -1620,6 +2031,7 @@
   function acceptCookies() {
     localStorage.setItem('cookieConsent', 'accepted');
     localStorage.setItem('cookieConsentDate', new Date().toISOString());
+    initStoreMetrika();
     document.getElementById('cookieBanner').style.display = 'none';
   }
   function declineCookies() {
@@ -1627,6 +2039,7 @@
     localStorage.setItem('cookieConsentDate', new Date().toISOString());
     document.getElementById('cookieBanner').style.display = 'none';
   }
+  initStoreMetrika();
   showCookieBanner();
 </script>
 

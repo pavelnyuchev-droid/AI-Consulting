@@ -1103,6 +1103,18 @@
     </div>
 
     <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      <h3>Автоматизация работы с заказами на Авито</h3>
+      <p>Новые заказы и сообщения с Авито попадают в вашу CRM или таблицу сами: уведомление в Telegram, статус заказа, напоминание о неотвеченном сообщении, отзыв в общую ленту. Работаем через официальный API Авито для бизнеса: заказы, доставка, сообщения, отзывы.</p>
+      <div class="service-tags">
+        <span class="tag">Авито API</span>
+        <span class="tag">n8n</span>
+        <span class="tag">Telegram</span>
+        <span class="tag">Bitrix24</span>
+      </div>
+    </div>
+
+    <div class="service-card fade-up">
       <div class="service-icon"><i class="fa-solid fa-database"></i></div>
       <h3>Интеграция с 1С и ERP</h3>
       <p>Связываем веб-платформы с 1С: Предприятие, синхронизируем справочники, заказы, оплаты и остатки без двойного ввода данных.</p>
@@ -1567,6 +1579,7 @@
               <option>Автоматизация бизнес-процессов</option>
               <option>Интеграция с CRM</option>
               <option>Интеграция с маркетплейсами</option>
+              <option value="avito_orders">Автоматизация заказов на Авито</option>
               <option>Интеграция с 1С / ERP</option>
               <option>Telegram-бот</option>
               <option>Аналитика и дашборды</option>
@@ -1909,7 +1922,9 @@
         ? 'audit_organization_site'
         : service === 'regulated_organization_site'
           ? 'regulated_organization_site'
-          : 'consultation',
+          : service === 'avito_orders'
+            ? 'avito_orders'
+            : 'consultation',
       promo_campaign: service === 'audit_organization_site' ? 'audit_pilot_2026' : '',
       promo_price: service === 'audit_organization_site' ? '29900' : '',
       source: window.location.hostname,

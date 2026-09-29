@@ -20,6 +20,7 @@ const files = [
   { local: path.join(__dirname, 'autoservice_it_infra_v2.pptx'), remote: '/autoservice_it_infra_v2.pptx' },
   { local: path.join(__dirname, 'privacy.html'), remote: '/privacy.html' },
   { local: path.join(__dirname, 'favicon.svg'), remote: '/favicon.svg' },
+  { local: path.join(__dirname, 'metodika.html'), remote: '/metodika.html' },
 ];
 
 function uploadFile(sftp, localPath, remotePath) {

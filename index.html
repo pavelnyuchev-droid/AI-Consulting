@@ -905,33 +905,6 @@
     .nav-mobile a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 1rem; }
     .nav-mobile a:hover { color: var(--white); }
 
-    .audit-promo {
-      max-width: 980px;
-      margin: 0 auto 2rem;
-      padding: 2rem;
-      border: 1px solid rgba(255,77,0,.45);
-      border-radius: 22px;
-      background: radial-gradient(circle at 15% 10%, rgba(255,77,0,.18), transparent 38%), var(--card);
-      box-shadow: 0 24px 70px rgba(0,0,0,.28);
-    }
-    .audit-promo-grid { display:grid;grid-template-columns:1fr 270px;gap:2rem;align-items:center; }
-    .audit-promo-badge { display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;border-radius:999px;background:var(--orange);color:#fff;font-size:.82rem;font-weight:800;margin-bottom:1rem; }
-    .audit-promo-price { display:flex;align-items:flex-end;gap:.8rem;flex-wrap:wrap;margin-top:1.1rem; }
-    .audit-promo-old { color:var(--muted);font-size:1.1rem;text-decoration:line-through; }
-    .audit-promo-new { color:var(--orange);font-size:2.6rem;line-height:1;font-weight:900; }
-    .audit-promo-counter { padding:1.35rem;border:1px solid var(--border);border-radius:18px;background:rgba(9,15,30,.8);text-align:center; }
-    .audit-promo-places { color:var(--orange);font-size:2.35rem;font-weight:900;margin:.25rem 0 .7rem; }
-    .audit-promo-timer { color:var(--white);font-size:.9rem;margin-bottom:1rem; }
-    .audit-promo-terms { color:#6f7894;font-size:.75rem;line-height:1.6;margin-top:1.35rem; }
-    .audit-promo-bar { position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:90;max-width:920px;margin:auto;display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border:1px solid rgba(255,77,0,.4);border-radius:18px;background:rgba(13,22,40,.96);box-shadow:0 18px 60px rgba(0,0,0,.45);backdrop-filter:blur(16px); }
-    .audit-promo-bar-copy { flex:1; }
-    .audit-promo-bar-close { border:0;background:transparent;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:.35rem; }
-    @media(max-width:720px) {
-      .audit-promo-grid { grid-template-columns:1fr; }
-      .audit-promo { padding:1.35rem; }
-      .audit-promo-bar { align-items:stretch;flex-direction:column;padding-right:2.5rem; }
-      .audit-promo-bar-close { position:absolute;right:.6rem;top:.45rem; }
-    }
   </style>
 </head>
 <body>
@@ -947,6 +920,7 @@
     <li><a href="#regulated-sites">Сайт для аудиторов</a></li>
     <li><a href="#how">Как работаем</a></li>
     <li><a href="#cases">Кейсы</a></li>
+    <li><a href="metodika.html">Методика</a></li>
     <li><a href="#contact" class="nav-cta">Оставить заявку</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Меню">
@@ -959,6 +933,7 @@
   <a href="#regulated-sites" onclick="toggleMenu()">Сайт для аудиторов</a>
   <a href="#how" onclick="toggleMenu()">Как работаем</a>
   <a href="#cases" onclick="toggleMenu()">Кейсы</a>
+  <a href="metodika.html">Методика</a>
   <a href="#contact" onclick="toggleMenu()" style="color:#FF8040;font-weight:700;">Оставить заявку</a>
 </div>
 
@@ -1158,31 +1133,6 @@
     что разместить, где разместить, в какой срок обновлять и сколько лет хранить в архиве.
   </p>
 
-  <div class="audit-promo fade-up">
-    <div class="audit-promo-grid">
-      <div>
-        <div class="audit-promo-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Пилотная программа</div>
-        <h3 style="font-size:clamp(1.7rem,3vw,2.35rem);margin-bottom:.7rem;">Скидка 50% первым 10 клиентам</h3>
-        <p style="color:var(--muted);line-height:1.7;">Базовый сайт аудиторской организации с разделом раскрытия информации.</p>
-        <div class="audit-promo-price">
-          <span class="audit-promo-old">59 800 ₽</span>
-          <span class="audit-promo-new">29 900 ₽</span>
-        </div>
-      </div>
-      <div class="audit-promo-counter">
-        <div style="color:var(--muted);font-size:.85rem;">Осталось мест</div>
-        <div class="audit-promo-places"><span class="audit-remaining">10</span> из 10</div>
-        <div class="audit-promo-timer"><i class="fa-regular fa-clock"></i> <span class="audit-countdown">Расчёт времени…</span></div>
-        <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;" onclick="chooseRegulatedService('audit_organization_site')">Закрепить место</a>
-      </div>
-    </div>
-    <p class="audit-promo-terms">
-      Предложение действует по 31 августа 2026 года включительно или до окончания 10 мест.
-      Место закрепляется после согласования состава проекта, заключения договора и внесения предусмотренной договором предоплаты.
-      Дополнительные работы и сопровождение оплачиваются отдельно.
-    </p>
-  </div>
-
   <div class="services-grid">
     <div class="service-card fade-up" style="border-color:rgba(255,77,0,.5);">
       <div class="service-icon"><i class="fa-solid fa-scale-balanced"></i></div>
@@ -1237,15 +1187,6 @@
     Разработка сайта не заменяет правовое заключение профильного специалиста.
   </p>
 </section>
-
-<div class="audit-promo-bar" id="auditPromoBar">
-  <div class="audit-promo-bar-copy">
-    <strong style="display:block;color:var(--white);">Сайт аудиторской организации — 29 900 ₽ вместо 59 800 ₽</strong>
-    <span style="color:var(--muted);font-size:.82rem;">Осталось <span class="audit-remaining">10</span> из 10 мест · до 1 ноября 2026 года</span>
-  </div>
-  <a href="#contact" class="btn-primary" onclick="chooseRegulatedService('audit_organization_site')">Закрепить место</a>
-  <button class="audit-promo-bar-close" type="button" aria-label="Закрыть специальное предложение" onclick="document.getElementById('auditPromoBar').remove()">×</button>
-</div>
 
 <!-- INTEGRATIONS -->
 <section style="padding-top: 0;">
@@ -1799,6 +1740,7 @@
       <div style="display:flex;flex-direction:column;gap:0.6rem;">
         <a href="#cases" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Кейсы</a>
         <a href="#how" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Как работаем</a>
+        <a href="metodika.html" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Методика ведения проектов с ИИ</a>
         <a href="https://prostodelai.ru" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Просто делай!</a>
         <a href="https://сопровождениеяндекседа.рф" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">Яндекс Еда</a>
       </div>
@@ -1925,8 +1867,6 @@
           : service === 'avito_orders'
             ? 'avito_orders'
             : 'consultation',
-      promo_campaign: service === 'audit_organization_site' ? 'audit_pilot_2026' : '',
-      promo_price: service === 'audit_organization_site' ? '29900' : '',
       source: window.location.hostname,
       page_url: window.location.href,
       name: formData.get('name'),
@@ -1989,22 +1929,6 @@
 </div>
 
 <script>
-  // Пилотная программа: значение меняется только после фактического закрепления места.
-  const auditPilotRemaining = 10;
-  const auditPilotDeadline = new Date('2026-09-01T00:00:00+03:00').getTime();
-  document.querySelectorAll('.audit-remaining').forEach(el => { el.textContent = auditPilotRemaining; });
-  function updateAuditCountdown() {
-    const difference = Math.max(0, auditPilotDeadline - Date.now());
-    const days = Math.floor(difference / 86400000);
-    const hours = Math.floor((difference % 86400000) / 3600000);
-    const minutes = Math.floor((difference % 3600000) / 60000);
-    document.querySelectorAll('.audit-countdown').forEach(el => {
-      el.textContent = difference > 0 ? `${days} дн. ${hours} ч. ${minutes} мин.` : 'Предложение завершено';
-    });
-  }
-  updateAuditCountdown();
-  setInterval(updateAuditCountdown, 60000);
-
   // Яндекс Метрика запускается только после согласия посетителя на аналитические cookies.
   const storeMetrikaId = 111095456;
   let storeMetrikaInitialized = false;

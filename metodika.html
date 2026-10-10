@@ -47,12 +47,20 @@
   <a class="back" href="index.html">← На главную</a>
 
   <h1>Методика ведения проектов с ИИ: знания копятся, успех доказывается</h1>
-  <p class="date">Версия 1.0 от 29 сентября 2026 г. · Павел Нючев, AI Consulting · лицензия CC BY 4.0</p>
+  <p class="date">Версия 2.0 от 10 октября 2026 г. (1.0 — 29 сентября) · Павел Нючев, AI Consulting · лицензия CC BY 4.0</p>
 
   <p class="lead">Как вести проекты вместе с нейросетями, чтобы каждая новая встреча и каждый документ делали проект богаче, а не заставляли начинать с нуля. Методика работает с любой моделью: ChatGPT, Claude, Gemini, DeepSeek, GigaChat, YandexGPT, Qwen — и с любым агентом.</p>
 
   <a class="btn" href="https://github.com/pavelnyuchev-droid/ai-project-method">Шаблоны и промпты на GitHub</a>
   <a class="btn ghost" href="index.html#contact">Внедрить в команде</a>
+
+  <div class="grid" id="method-stats" hidden>
+    <div class="card"><h3 id="st-views">—</h3><p>просмотров репозитория</p></div>
+    <div class="card"><h3 id="st-clones">—</h3><p>скачиваний (клонирований)</p></div>
+    <div class="card"><h3 id="st-stars">—</h3><p>звёзд на GitHub</p></div>
+    <div class="card"><h3 id="st-cites">—</h3><p>упоминаний в других репозиториях</p></div>
+  </div>
+  <p class="date" id="st-note" hidden></p>
 
   <h2>Идея в трёх фразах</h2>
   <div class="grid">
@@ -68,6 +76,9 @@
     <li><strong>Andrej Karpathy</strong>, <a href="https://github.com/karpathy/autoresearch">autoresearch</a>: автономный цикл по программе с одной метрикой.</li>
     <li><strong>Практика <a href="https://github.com/ARARAT33">ARARAT33</a></strong>: никакого фальшивого успеха, доказательства готовности.</li>
     <li><strong>Собственный опыт</strong> консалтинговых проектов по автоматизации: вопросы по одному, решения с причинами, подтверждения заказчику.</li>
+    <li><strong>CNSC, ONR, US NRC</strong>, <a href="https://www.onr.org.uk/media/03zl1osf/canukus_trilateral_ai_principles_paper_2024_08_28-final.pdf">Considerations for developing AI systems in nuclear applications</a> (2024), и отчёт ONR о регуляторной песочнице по ИИ: автономность и последствия, «вероятность отказа ИИ = 1», безопасное состояние.</li>
+    <li><strong>UC Berkeley</strong>, <a href="https://arxiv.org/abs/2503.13657">MAST</a>: почему ломаются мультиагентные системы. <strong>PMI</strong>, PMBOK: устав, изменения, риски, закрытие.</li>
+    <li>Доклады конференции CNews «Технологии искусственного интеллекта» (22.09.2026): ступени автономии, эталонные случаи, метрики процесса.</li>
   </ul>
 
   <h2>Три слоя проекта</h2>
@@ -94,6 +105,7 @@
     <tr><td><strong>принято</strong></td><td>заказчик подтвердил: кто, когда, ссылка на письмо или стенограмму</td></tr>
     <tr><td><strong>регресс</strong></td><td>сломалось — отметка снимается, в журнал пишется инцидент</td></tr>
   </table></div>
+  <p><strong>Замер «до».</strong> Пока процесс ручной, снимается базовая линия. Четыре метрики вместе: сквозное время, доля принятых с первого раза, пропущенные эскалации, минуты проверки на единицу результата. Готовность («внедрено») и результат (эффект против замера) — разные вещи.</p>
 
   <h2>Четыре правила исполнителя</h2>
   <ol>
@@ -102,6 +114,22 @@
     <li><strong>Хирургические правки.</strong> Трогать только то, что требует задача.</li>
     <li><strong>Проверяемая цель.</strong> Критерии успеха — до начала работы; план — «шаг → проверка».</li>
   </ol>
+
+  <h2>ИИ внутри решения <span style="color:#FF8040;font-size:.8rem">новое в 2.0</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Нужен ли здесь ИИ</h3><p>Для каждого шага: можно ли его убрать → регламент → автоматизация без LLM → ассистент → агент с подтверждением. ИИ — только если выигрывает.</p></div>
+    <div class="card"><h3>Паспорт ИИ-шага</h3><p>Ступень автономии 0–5, кто проверяет, ограничители, безопасное состояние, порог «не уверен». Деньги и медицина — не выше «с подтверждением человека».</p></div>
+    <div class="card"><h3>Отказ = 1</h3><p>Для важных шагов проектируем так, будто ИИ уже ошибся: доверие держится на архитектуре, а не на просьбе в промпте.</p></div>
+    <div class="card"><h3>Проверка до агента</h3><p>30–50 эталонных случаев на каждый ИИ-шаг, прогон после каждой правки, параллельный прогон с ручным процессом.</p></div>
+  </div>
+
+  <h2>Закон, риски, закрытие <span style="color:#FF8040;font-size:.8rem">новое в 2.0</span></h2>
+  <ul>
+    <li><strong>Закон и персональные данные</strong> — раздел в каждом проекте: где хранятся данные, уходят ли во внешние модели, согласия, уведомления, порядок при утечке.</li>
+    <li><strong>Устав</strong> с ожидаемыми выгодами и владельцем эффекта у заказчика; всё сверх границ — только через запрос на изменение.</li>
+    <li><strong>Реестр рисков</strong> с еженедельным обзором; <strong>протокол закрытия</strong>: цели, критерии, выгоды, передача, уроки; план вывода системы из эксплуатации.</li>
+    <li>Опора на ISO 20700, ГОСТ Р ИСО 21502-2024, ГОСТ Р ИСО 31000-2019, ISO/IEC 19510 (BPMN), ГОСТ Р ИСО/МЭК 42001-2024 — опора, а не заявление о сертификации.</li>
+  </ul>
 
   <h2>С любой нейросетью</h2>
   <ul>
@@ -123,6 +151,22 @@
     <p><strong>Хотите внедрить методику в своей команде</strong> или вести проект автоматизации по ней вместе с нами? <a href="index.html#contact">Оставьте заявку</a> — разберём ваш случай.</p>
   </div>
 
+  <script>
+    // Счётчик: статистику раз в сутки собирает GitHub Actions в репозитории методики
+    fetch('https://raw.githubusercontent.com/pavelnyuchev-droid/ai-project-method/main/stats/summary.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (s) {
+        document.getElementById('st-views').textContent = s.views_total;
+        document.getElementById('st-clones').textContent = s.clones_total;
+        document.getElementById('st-stars').textContent = s.stars;
+        document.getElementById('st-cites').textContent = s.citations_github;
+        var note = document.getElementById('st-note');
+        note.textContent = 'Счёт ведётся с ' + s.counting_since + ', обновлено ' + s.updated + '.';
+        note.hidden = false;
+        document.getElementById('method-stats').hidden = false;
+      })
+      .catch(function () {});
+  </script>
   <footer>© 2026 AI Consulting · Павел Нючев · Методика распространяется по лицензии <a href="https://creativecommons.org/licenses/by/4.0/deed.ru">CC BY 4.0</a> · <a href="privacy.html">Политика конфиденциальности</a></footer>
 </div>
 </body>

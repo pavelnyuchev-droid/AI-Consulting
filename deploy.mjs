@@ -5,11 +5,16 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+if (!process.env.BEGET_PASSWORD) {
+  console.error('Не задан BEGET_PASSWORD (секрет репозитория или переменная окружения)');
+  process.exit(1);
+}
+
 const config = {
   host: 'nuchevy7.beget.tech',
   port: 22,
   username: 'nuchevy7',
-  password: process.env.BEGET_PASSWORD || 'ThdGCOF8hziy',
+  password: process.env.BEGET_PASSWORD,
   tryKeyboard: true,
 };
 

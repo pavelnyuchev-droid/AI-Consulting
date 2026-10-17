@@ -21,6 +21,7 @@ const files = [
   { local: path.join(__dirname, 'privacy.html'), remote: '/privacy.html' },
   { local: path.join(__dirname, 'favicon.svg'), remote: '/favicon.svg' },
   { local: path.join(__dirname, 'metodika.html'), remote: '/metodika.html' },
+  { local: path.join(__dirname, 'metodika-patterny.html'), remote: '/metodika-patterny.html' },
 ];
 
 function uploadFile(sftp, localPath, remotePath) {
